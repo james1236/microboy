@@ -1,5 +1,5 @@
 # microboy
-My raspberry pi zero / CM4 powered mini computer (3d print files, code, product lists)
+My raspberry pi zero powered mini computer (3d print files, code, product lists)
 
 ![Preview Image](docs/readmeImage.png)
 <br>
@@ -13,13 +13,11 @@ Analog to Digital converter - Adafruit ADS1015 12-bit I2C
 
 Battery - LP603450 LiPoly 3.7V 1000mAh TG15
 
-Battery Charge / Voltage regulator / Transformer board - Adafruit PowerBoost 500 Charger TPS61090 DC Boost 
+Battery Charge / Voltage regulator / Transformer board - Adafruit PowerBoost 500 Charger TPS61090 DC Boost (Not strong enough to power pi4 or CM4)
 
-Small Switch (unknown)
+Small Dip Switch (unknown)
 
 Raspberry Pi Zero W
-
-(Will need to create a GPIO & Power breakout board if you want to use a Compute Module 4 instead)
 
 <br>
 
