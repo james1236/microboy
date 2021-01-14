@@ -63,6 +63,7 @@ def button_callback1(channel):
             sleep(10)
             os.system('pkill dis.sh')
             os.system('pkill psp.sh')
+			sleep(1)
             os.system('pkill python3')
     
 def button_callback2(channel):

@@ -13,13 +13,13 @@ ads.mode = Mode.SINGLE
 pspX = AnalogIn(ads, ADS.P0)
 pspY = AnalogIn(ads, ADS.P1)
 
-input("Press enter with centered joystick to calibrate")
+#input("Press enter with centered joystick to calibrate")
 centerX = pspX.value
 centerY = pspY.value
 
-import pygame
-screen = pygame.display.set_mode((300,300))
-pygame.display.flip()
+#import pygame
+#screen = pygame.display.set_mode((300,300))
+#pygame.display.flip()
 
 """
 input("Press enter at top")
@@ -52,10 +52,10 @@ while 1:
 import mouse
 
 while 1:
-    print("X")
+    #print("X")
     circleColor = (255,0,0)
     
-    thresh = 0.05
+    thresh = 0.075
     alive = False
     
     xval = -(pspX.value-centerX)/20000
@@ -66,8 +66,8 @@ while 1:
         alive = True
         
     #screen.fill((255,255,255))
-    pygame.draw.circle(screen,circleColor,(int(xval*300)+150,int(yval*300)+150),5,1)
-    pygame.display.update()
+    #pygame.draw.circle(screen,circleColor,(int(xval*300)+150,int(yval*300)+150),5,1)
+    #pygame.display.update()
     
     if (alive):
-        mouse.move(xval*50, yval*50, absolute=False, duration=0)
+        mouse.move(xval*10, yval*10, absolute=False, duration=0)
