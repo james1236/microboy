@@ -71,3 +71,54 @@ ADS1015 A1 -> Joystick X/Y (Pin 3)
 
 PowerBoost EN -> Small Switch Left
 </pre>
+
+<br>
+
+### Software
+
+**Run in the console of your raspberry pi:**
+
+```
+sudo apt-get install cmake
+cd ~
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341
+mkdir build
+cd build
+```
+
+Then make sure the SPI interface is turned off either in raspi-config or through `sudo nano /boot/config.txt` and making sure the line `dtparam=spi=off` is there (not sure if this is a necessary step)
+
+If you have previously run 'cmake' and would like a fresh start do this:
+
+```
+cd fbcp-ili9341/build
+rm -r *
+```
+
+Then run the command below changing your wire numbers (if you're using different wiring) for `-DGPIO_TFT_DATA_CONTROL=17 -DGPIO_TFT_RESET_PIN=22 -DGPIO_TFT_BACKLIGHT=27` to the BCM pins from this site https://pinout.xyz/pinout/pin13_gpio27
+
+`cmake -DST7789VW=ON -DGPIO_TFT_DATA_CONTROL=17 -DGPIO_TFT_RESET_PIN=22 -DGPIO_TFT_BACKLIGHT=27 -DSTATISTICS=0 -DSPI_BUS_CLOCK_DIVISOR=40 -DUSE_DMA_TRANSFERS=OFF ..`
+
+Finally run
+
+```
+make -j
+sudo ./fbcp-ili9341
+```
+
+And if your display is like mine (advertised as ST7789 but ended up working with ST7789VW, no cs pin) it might work
+
+For autorun on startup put this line before `exit 0` in your `sudo nano /etc/rc.local`
+
+`sudo /home/pi/fbcp-ili9341/build/fbcp-ili9341 &`
+
+These lines are in my `sudo nano /boot/config.txt` file:
+
+```
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=640 640 60 1 0 0 0
+hdmi_force_hotplug=1
+```
+Make sure that all references to `dtoverlay=vc4-fkms-v3d` are removed/commented out with `#` although I'm not sure if necessary
