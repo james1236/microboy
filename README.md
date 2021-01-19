@@ -1,7 +1,7 @@
 # microboy
 My raspberry pi zero powered mini computer (3d print files, code, product lists)
 
-![Preview Image](photo.png)
+<img src="photo.png" width="350"></img>
 <br>
 
 ### Parts
