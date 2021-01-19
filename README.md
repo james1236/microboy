@@ -91,7 +91,7 @@ Then run `sudo nano display.h` and paste in
 
 under the line
 
-`#define DISPLAY_WRITE_PIXELS 0x2C`
+`#define DISPLAY_SPI_DRIVE_SETTINGS (0)`
 
 Then continue with
 
