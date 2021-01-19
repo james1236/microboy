@@ -83,6 +83,19 @@ sudo apt-get install cmake
 cd ~
 git clone https://github.com/juj/fbcp-ili9341.git
 cd fbcp-ili9341
+```
+
+Then run `sudo nano display.h` and paste in 
+
+`#define DISPLAY_SPI_DRIVE_SETTINGS (1 | BCM2835_SPI0_CS_CPOL | BCM2835_SPI0_CS_CPHA)`
+
+under the line
+
+`#define DISPLAY_WRITE_PIXELS 0x2C`
+
+Then continue with
+
+```
 mkdir build
 cd build
 ```
