@@ -17,6 +17,8 @@ Battery Charge / Voltage regulator / Transformer board - Adafruit PowerBoost 500
 
 Small Dip Switch (unknown)
 
+9 Momentary Tactile PCB Push Buttons 6mm x 6mm
+
 Raspberry Pi Zero W
 
 <br>
