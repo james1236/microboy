@@ -137,3 +137,16 @@ hdmi_cvt=640 640 60 1 0 0 0
 hdmi_force_hotplug=1
 ```
 Make sure that all references to `dtoverlay=vc4-fkms-v3d` are removed/commented out with `#` although I'm not sure if necessary
+
+<br>
+
+### Extra info
+* Avoid using this display, there is very little compatability for the version of the ST7789 display without a CS pin.
+* `fbcp-ili9341` doesn't work on 64 bit operating systems yet
+* `fbcp-ili9341` puts the screen to sleep after a while of keyboard inactivity, give a keyboard input after starting it if you are getting a black screen
+* The ADC python library is depreciated and the wrong version gets installed if you use pip, you can clone it [here](https://github.com/adafruit/Adafruit_Python_ADS1x15), usage guide [here](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/ads1015-slash-ads1115)
+* The crontab syntax for starting `fbcp-ili9341` on boot is putting `@reboot root /home/pi/fbcp-ili9341/build/fbcp-ili9341` in `/etc/crontab`
+* Neither the Adafruit PowerBoost 500, nor a lipo battery of this size are strong enough to power a RPi 4 or CM4
+* On some operating systems, `fbcp-ili9341` won't build and will give the error `selected processor lacks an FPU` unless you remove the flags `-mfloat-abi=hard` and `-mhard-float` from somewhere in `display.h`
+* The original Pi Zero W (used here) is too slow for decent internet browsing
+* `pyautogui`'s mouse movement is too slow on the Pi Zero W and causes noticeable stutter, use `mouse` instead
