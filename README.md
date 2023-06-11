@@ -115,6 +115,9 @@ Then run the command below changing your wire numbers (if you're using different
 
 `cmake -DST7789VW=ON -DGPIO_TFT_DATA_CONTROL=17 -DGPIO_TFT_RESET_PIN=22 -DGPIO_TFT_BACKLIGHT=27 -DSTATISTICS=0 -DSPI_BUS_CLOCK_DIVISOR=40 -DUSE_DMA_TRANSFERS=OFF -DDISPLAY_ROTATE_180_DEGREES=ON ..`
 
+The DMA transfers argument increases the framerate and decreases CPU usage, should be used when possible (disabled because it didn't work for me)
+`DSPI_BUS_CLOCK_DIVISOR` should be a minimal even number (start out at something safe like 40, then decrease for better FPS until you notice glitches)
+
 Finally run
 
 ```
@@ -143,15 +146,16 @@ To get fbcp-ili9341 working on a rpi 4 running a 64 bit operating system, you ca
 ```
 git clone --branch rpi2w-64bit-port https://github.com/zxfishhack/fbcp-ili9341.git
 ```
+(uses a fork of `fbcp-ili9341` with 64 bit compatability)
 ```
-cmake -DST7789VW=ON -DGPIO_TFT_DATA_CONTROL=17 -DGPIO_TFT_RESET_PIN=22 -DGPIO_TFT_BACKLIGHT=27 -DSTATISTICS=0 -DSPI_BUS_CLOCK_DIVISOR=40 -DUSE_DMA_TRANSFERS=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DAARCH64=YES ..
+cmake -DST7789VW=ON -DGPIO_TFT_DATA_CONTROL=17 -DGPIO_TFT_RESET_PIN=22 -DGPIO_TFT_BACKLIGHT=27 -DSTATISTICS=0 -DSPI_BUS_CLOCK_DIVISOR=6 -DUSE_DMA_TRANSFERS=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DAARCH64=YES ..
 ```
-Note the difference of `-DUSE_DMA_TRANSFERS=ON` and `-DAARCH64=YES`. DMA transfers increases the framerate and decreases CPU usage, should be used when possible. The DAARCH64 parameter enables some of the changes in the `rpi2w-64bit-port` branch of `zxfishhack`'s fork of `fbcp-ili9341`
+Note the difference of `-DUSE_DMA_TRANSFERS=ON`, `-DAARCH64=YES` and `-DSPI_BUS_CLOCK_DIVISOR=6`. DMA transfers increases the framerate and decreases CPU usage, should be used when possible. The DAARCH64 parameter enables some of the changes in the `rpi2w-64bit-port` branch of [zxfishhack's fork](https://github.com/zxfishhack/fbcp-ili9341/tree/rpi2w-64bit-port) of `fbcp-ili9341`. `DSPI_BUS_CLOCK_DIVISOR` should be a minimal even number (start out at something safe like 40, then decrease for better FPS until you notice glitches)
 
 <br>
 
 ### Extra info
-* Avoid using this display, there is very little compatability for the version of the ST7789 display without a CS pin.
+* Avoid using this display, there is very little compatability for the version of the 240x240 small ST7789 display without a CS pin.
 * ~~`fbcp-ili9341` doesn't work on 64 bit operating systems yet~~
 * `fbcp-ili9341` puts the screen to sleep after a while of keyboard inactivity, give a keyboard input after starting it if you are getting a black screen
 * The ADC python library is depreciated and the wrong version gets installed if you use pip, you can clone it [here](https://github.com/adafruit/Adafruit_Python_ADS1x15), usage guide [here](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/ads1015-slash-ads1115)
